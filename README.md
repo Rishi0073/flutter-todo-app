@@ -46,6 +46,16 @@ Why this structure matters for a job:
 - `flutter analyze` and `flutter test` run on every push via
   GitHub Actions.
 
+## Download the APK (built by GitHub Actions)
+
+Every push to `main` builds a release APK automatically:
+
+1. Open the repo on GitHub, go to the **Actions** tab
+2. Open the latest **Flutter CI + APK Build** run
+3. Download the **todo-app-release-apk** artifact, unzip it,
+   and install `app-release.apk` on an Android phone
+   (allow installing from your browser/files app when asked)
+
 ## How to run it
 
 1. Install the Flutter SDK, then check it with `flutter doctor`
