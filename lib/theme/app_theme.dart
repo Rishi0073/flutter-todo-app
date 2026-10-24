@@ -8,4 +8,14 @@ class AppTheme {
       useMaterial3: true,
     );
   }
+
+  static ThemeData get dark {
+    return ThemeData(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.teal,
+        brightness: Brightness.dark,
+      ),
+      useMaterial3: true,
+    );
+  }
 }
