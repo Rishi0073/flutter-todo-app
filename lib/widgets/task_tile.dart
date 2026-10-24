@@ -10,11 +10,13 @@ class TaskTile extends StatelessWidget {
     required this.task,
     required this.onToggle,
     required this.onDelete,
+    required this.onTap,
   });
 
   final Task task;
   final VoidCallback onToggle;
   final VoidCallback onDelete;
+  final VoidCallback onTap;
 
   Color _priorityColor() {
     switch (task.priority) {
@@ -27,8 +29,20 @@ class TaskTile extends StatelessWidget {
     }
   }
 
+  String _dueLabel() {
+    if (task.dueDate == null) return '';
+    final d = task.dueDate!;
+    final label = '${d.day}/${d.month}/${d.year}';
+    if (task.isOverdue) return 'Overdue: $label';
+    return 'Due: $label';
+  }
+
   @override
   Widget build(BuildContext context) {
+    final subtitleParts = <String>[task.category.label, task.priority.label];
+    if (task.dueDate != null) subtitleParts.add(_dueLabel());
+    if (task.description.isNotEmpty) subtitleParts.add(task.description);
+
     return ListTile(
       leading: Checkbox(
         value: task.done,
@@ -42,13 +56,22 @@ class TaskTile extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        task.priority.label,
-        style: TextStyle(color: _priorityColor()),
+        subtitleParts.join('  ·  '),
+        style: TextStyle(
+          color: task.isOverdue ? Colors.red : null,
+        ),
       ),
-      trailing: IconButton(
-        icon: const Icon(Icons.delete),
-        onPressed: onDelete,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.flag, color: _priorityColor(), size: 18),
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: onDelete,
+          ),
+        ],
       ),
+      onTap: onTap,
     );
   }
 }
