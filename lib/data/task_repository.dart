@@ -26,16 +26,19 @@ class SharedPreferencesTaskRepository implements TaskRepository {
           id: 'seed-1',
           title: 'Learn Flutter widgets',
           priority: TaskPriority.high,
+          category: TaskCategory.study,
         ),
         Task(
           id: 'seed-2',
           title: 'Build a small app every week',
           priority: TaskPriority.medium,
+          category: TaskCategory.work,
         ),
         Task(
           id: 'seed-3',
           title: 'Push this project to GitHub',
           priority: TaskPriority.medium,
+          category: TaskCategory.work,
         ),
       ];
     }
